@@ -488,8 +488,7 @@
       "[EFFECT getItem:International Trade Deals]",
       "[EFFECT Authority-5]",
       "[EFFECT Goodwill-12]",
-      "[EFFECT Popularity+12]",
-      "[EFFECT"
+      "[EFFECT Popularity+12]"
     ],
     "PROSE": [
       "Puppet or not, you have a great story to sell to the public. You particularly appreciate the headline one of the tabloids comes up with: \"YOU'RE HIRED! BRITAIN NABS THE DEAL THE EU COULDN'T CLOSE.\""
@@ -569,7 +568,7 @@
       "<strong>+1% Authority</strong>: MPs love a leader with unshakeable self-assurance. They mistake it for competence."
     ],
     "GOTO": [
-      "[If keyword:NYLON] \"Continue\" ►193",
+      "[IF keyword:NYLON] \"Continue\" ►193",
       "[ELSE] \"Continue\" ►726"
     ]
   },
@@ -588,7 +587,7 @@
       "Sterling is falling faster than Wile E Coyote carrying an anvil. People are angry that their shopping bill gets more eye-wateringly expensive every week."
     ],
     "GOTO": [
-      "[IF Economy502",
+      "[IF Economy<50] \"Continue\" ►502",
       "[ELSE] \"Continue\" ►311"
     ]
   },
@@ -1318,8 +1317,8 @@
       "This promises to be a battle-royal. Despite a stompingly insensitive public persona beside which Prince Philip comes across as the poster boy for liberal enlightenment, Peter Strewel is the darling of the grassroots members."
     ],
     "GOTO": [
-      "[IF Goodwill78",
-      "[ELSEIF Goodwill score>=66] \"Continue\" ►783",
+      "[IF Goodwill>=78] \"Continue\" ►78",
+      "[ELSEIF Goodwill>=66] \"Continue\" ►783",
       "[ELSE] \"Continue\" ►415"
     ]
   },
@@ -1629,8 +1628,8 @@
     ],
     "GOTO": [
       "[IF Popularity>=70] \"Continue\" ►519",
-      "[ELSEIF Popularity782",
-      "[ELSEIF Popularity727",
+      "[ELSEIF Popularity<50] \"Continue\" ►782",
+      "[ELSEIF Popularity<60] \"Continue\" ►727",
       "[ELSE] \"Continue\" ►528"
     ]
   },
@@ -2928,7 +2927,7 @@
       "How unpopular would you have to be to lose to somebody who all but admits Brexit will be a disaster?"
     ],
     "GOTO": [
-      "[IF Popularity782",
+      "[IF Popularity<50] \"Continue\" ►782",
       "[ELSE] \"Continue\" ►244"
     ]
   },
@@ -2989,7 +2988,7 @@
       "It's with a sinking feeling that you realize that description would also fit a fair proportion of the party members."
     ],
     "GOTO": [
-      "[IF keyword:OPAL AND Authority70",
+      "[IF keyword:OPAL AND Authority>=50] \"Continue\" ►70",
       "[ELSE] \"Carry on\" ►544"
     ]
   },
@@ -3172,7 +3171,7 @@
       "Next let's consider the state of the UK's relationship with the European Union. After the sometimes bitter contest of the divorce settlement, can you stay friends?"
     ],
     "GOTO": [
-      "[IF Goodwill702",
+      "[IF Goodwill>=70] \"Continue\" ►702",
       "[ELSEIF Goodwill>=60] \"Hopefully with benefits\" ►848",
       "[ELSE] \"It's complicated\" ►144"
     ]
@@ -4407,7 +4406,7 @@
   "302": {
     "ROUTES": [
       "[IF Economy>=52] ►819",
-      "[ELSEIF Economy478",
+      "[ELSEIF Economy>=48] ►478",
       "[ELSE] ►361"
     ]
   },
@@ -4495,8 +4494,8 @@
     ],
     "GOTO": [
       "[IF Popularity>=70] \"Press on\" ►519",
-      "[ELSEIF Popularity782",
-      "[ELSEIF Popularity727",
+      "[ELSEIF Popularity<50] \"Continue\" ►782",
+      "[ELSEIF Popularity<60] \"Continue\" ►727",
       "[ELSE] \"Continue\" ►528"
     ]
   },
@@ -4833,7 +4832,7 @@
     "OPTIONS": [
       "[IF Goodwill>=16] [OPTION] \"Reopen those discussions\" ►548",
       "[IF Goodwill>=16] [OPTION] \"No point – why bother staying in the single market?\" ►666",
-      "[IF Goodwill666"
+      "[IF Goodwill<16] [OPTION] \"Continue\" ►666"
     ]
   },
   "334": {
@@ -4915,7 +4914,7 @@
     ],
     "GOTO": [
       "[IF keyword:LEAF AND Authority>=51] \"See what happens\" ►561",
-      "[ELSEIF Authority>=58 AND Goodwill381",
+      "[ELSEIF Authority>=58 AND Goodwill>=40] \"Continue\" ►381",
       "[ELSE] \"But are you prepared?\" ►377"
     ]
   },
@@ -5060,7 +5059,7 @@
       "Fighting talk, or famous last words?"
     ],
     "GOTO": [
-      "[IF Economy782",
+      "[IF Economy<50] \"Continue\" ►782",
       "[ELSE] \"You come out swinging\" ►519"
     ]
   },
@@ -5087,7 +5086,7 @@
       "And finally, what do the British people think of you personally? Heaven-sent saviour? Or prophet without honour?"
     ],
     "GOTO": [
-      "[IF Popularity823",
+      "[IF Popularity>=72] \"Continue\" ►823",
       "[ELSEIF Popularity>=61] \"They're cheering you in the streets\" ►292",
       "[ELSE] \"Let's find out\" ►462"
     ]
@@ -5513,7 +5512,7 @@
       "And after three years with you as Prime Minister, what's the outlook for Britain's economy?"
     ],
     "GOTO": [
-      "[IF Economy108",
+      "[IF Economy>=68] \"Let's find out\" ►108",
       "[ELSEIF Economy>=56] \"Let's find out\" ►328",
       "[ELSE] \"Let's find out\" ►46"
     ]
@@ -5830,7 +5829,7 @@
   },
   "412": {
     "ROUTES": [
-      "[IF keyword:LEAF AND Goodwill85",
+      "[IF keyword:LEAF AND Goodwill>=50] ►85",
       "[ELSE] ►594"
     ]
   },
@@ -6049,8 +6048,8 @@
     ],
     "GOTO": [
       "[IF Popularity>=66] \"Continue\" ►697",
-      "[ELSEIF Popularity825",
-      "[ELSEIF Popularity593",
+      "[ELSEIF Popularity>=56] \"Continue\" ►825",
+      "[ELSEIF Popularity>=46] \"Continue\" ►593",
       "[ELSE] \"Continue\" ►568"
     ]
   },
@@ -6619,7 +6618,7 @@
       "Gervais Noysom-Reek made the right ideological noises, but the MPs are still rational enough to prefer a leader with some experience and political skill. He is knocked out of the running, leaving you and Tiffany Rufus to go through to the final selection by the Party members."
     ],
     "GOTO": [
-      "[IF Popularity782",
+      "[IF Popularity<50] \"Continue\" ►782",
       "[ELSE] \"The moment of truth\" ►519"
     ]
   },
@@ -7469,7 +7468,7 @@
   },
   "544": {
     "ROUTES": [
-      "[IF keyword:LEAF AND Goodwill787",
+      "[IF keyword:LEAF AND Goodwill>=50] ►787",
       "[ELSE] ►664"
     ]
   },
@@ -7564,7 +7563,7 @@
   },
   "552": {
     "ROUTES": [
-      "[IF keyword:OPAL AND Authority209",
+      "[IF keyword:OPAL AND Authority>=50] ►209",
       "[ELSE] ►412"
     ]
   },
@@ -7876,7 +7875,7 @@
       "The winner will be picked by the Party membership. And so a hundred and fifty thousand people get to decide the future of Great Britain."
     ],
     "GOTO": [
-      "[IF Popularity782",
+      "[IF Popularity<50] \"Continue\" ►782",
       "[ELSE] \"You're quietly confident\" ►519"
     ]
   },
@@ -8092,7 +8091,7 @@
       "And that's when the phone rings."
     ],
     "GOTO": [
-      "[IF Authority>=56 AND Goodwill759",
+      "[IF Authority>=56 AND Goodwill>=45] \"Continue\" ►759",
       "[ELSE] \"What now?\" ►546"
     ]
   },
@@ -8821,7 +8820,7 @@
     ],
     "GOTO": [
       "[IF Goodwill>=52] \"Carry on\" ►204",
-      "[ELSEIF Goodwill864",
+      "[ELSEIF Goodwill>=42] \"Carry on\" ►864",
       "[ELSE] \"Carry on\" ►245"
     ]
   },
@@ -9083,7 +9082,7 @@
   },
   "671": {
     "ROUTES": [
-      "[IF Authority>=61 AND Goodwill40",
+      "[IF Authority>=61 AND Goodwill>=40] ►40",
       "[ELSE] ►792"
     ]
   },
@@ -9793,7 +9792,7 @@
       "'Luckily, before it reaches the membership, we have one more round of Parliamentary voting. Tiffany Rufus will probably scoop up all the moderate votes. I just have to come across as more likely to deliver a strong Brexit than Noysom-Reek.'"
     ],
     "GOTO": [
-      "[IF keyword:OPAL AND Authority107",
+      "[IF keyword:OPAL AND Authority>=50] \"Continue\" ►107",
       "[ELSE] \"Slog on\" ►615"
     ]
   },
@@ -9926,7 +9925,7 @@
       "First, your grip on power."
     ],
     "GOTO": [
-      "[IF Authority850",
+      "[IF Authority>=86] \"Continue\" ►850",
       "[ELSEIF Authority>=76] \"An iron fist in an iron glove\" ►804",
       "[ELSE] \"Let's find out\" ►515"
     ]
@@ -10466,7 +10465,7 @@
   },
   "777": {
     "ROUTES": [
-      "[IF Goodwill>=46 AND Popularity141",
+      "[IF Goodwill>=46 AND Popularity>=42] ►141",
       "[ELSE] ►238"
     ]
   },
@@ -10696,7 +10695,7 @@
     ],
     "GOTO": [
       "[IF Popularity>=69] \"Tally ho!\" ►455",
-      "[ELSEIF Popularity149",
+      "[ELSEIF Popularity>=59] \"Continue\" ►149",
       "[ELSE] \"Let's find out\" ►753"
     ]
   },
@@ -10842,7 +10841,7 @@
       "'You have never really understood that we are not a federal state. You are dealing with twenty-seven sovereign countries, each with its own interests.'"
     ],
     "GOTO": [
-      "[IF Goodwill798",
+      "[IF Goodwill>=80] \"Continue\" ►798",
       "[ELSEIF Goodwill>=70] \"Call in some favours\" ►526",
       "[ELSE] \"Carry on\" ►88"
     ]
@@ -11145,7 +11144,7 @@
     "OPTIONS": [
       "[IF Goodwill>=16] [OPTION] \"Reopen those discussions\" ►257",
       "[IF Goodwill>=16] [OPTION] \"Forget about single market access\" ►385",
-      "[IF Goodwill385"
+      "[IF Goodwill<16] [OPTION] \"Continue\" ►385"
     ]
   },
   "832": {
