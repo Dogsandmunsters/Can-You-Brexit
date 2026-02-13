@@ -2431,10 +2431,10 @@
       "(Incidentally, if you need a rest from running the country, this is a good place to take a break and come back later.)"
     ],
     "OPTIONS": [
-      "[IF !item:Exit Fee] [OPTION] \"Deal with the Exit Fee\" [EFFECT tick:150.next] ►768",
-      "[IF !item:Residency Rights] [OPTION] \"Deal with the rights of EU citizens already living in Britain\" [EFFECT tick:150.next] ►494",
-      "[IF !item:Immigration] [OPTION] \"Deal with the question of immigration and border controls\" [EFFECT tick:150.next] ►622",
-      "[IF !item:Negotiation Strategy] [OPTION] \"Agree a framework with the EU for how talks should proceed\" [EFFECT tick:150.next] ►558"
+      "[IF !item:Exit Fee AND !box:150.box3] [OPTION] \"Deal with the Exit Fee\" [EFFECT tick:150.next] [EFFECT tick:150.box3] ►768",
+      "[IF !item:Residency Rights AND !box:150.box4] [OPTION] \"Deal with the rights of EU citizens already living in Britain\" [EFFECT tick:150.next] [EFFECT tick:150.box4] ►494",
+      "[IF !item:Immigration AND !box:150.box5] [OPTION] \"Deal with the question of immigration and border controls\" [EFFECT tick:150.next] [EFFECT tick:150.box5] ►622",
+      "[IF !item:Negotiation Strategy AND !box:150.box6] [OPTION] \"Agree a framework with the EU for how talks should proceed\" [EFFECT tick:150.next] [EFFECT tick:150.box6] ►558"
     ]
   },
   "151": {
@@ -3699,11 +3699,11 @@
       "Running a country – it's a lot to do. You're just one person and you've only got two years, so decide which aspect of Brexit you're going to oversee in person. You'll only have time to deal with one of these; your ministers will take care of the rest."
     ],
     "OPTIONS": [
-      "[IF keyword:APRICITY] [OPTION] \"Negotiate the Exit Fee\" [EFFECT tick:250.box1] ►720",
-      "[IF !item:EU Trade Talks] [OPTION] \"Deal with EU Trade Talks\" [EFFECT tick:250.box1] ►688",
-      "[IF !item:Residency Rights] [OPTION] \"Deal with Residency Rights of UK and EU citizens\" [EFFECT tick:250.box1] ►638",
-      "[IF !item:General Election] [OPTION] \"Try to to call a General Election\" [EFFECT tick:250.box1] ►416",
-      "[IF !item:Security & Defence] [OPTION] \"Handle the question of UK/EU cooperation on Security & Defence\" [EFFECT tick:250.box1] ►420"
+      "[IF keyword:APRICITY AND !box:250.box2] [OPTION] \"Negotiate the Exit Fee\" [EFFECT tick:250.box1] [EFFECT tick:250.box2] ►720",
+      "[IF !item:EU Trade Talks AND !box:250.box3] [OPTION] \"Deal with EU Trade Talks\" [EFFECT tick:250.box1] [EFFECT tick:250.box3] ►688",
+      "[IF !item:Residency Rights AND !box:250.box4] [OPTION] \"Deal with Residency Rights of UK and EU citizens\" [EFFECT tick:250.box1] [EFFECT tick:250.box4] ►638",
+      "[IF !item:General Election AND !box:250.box5] [OPTION] \"Try to to call a General Election\" [EFFECT tick:250.box1] [EFFECT tick:250.box5] ►416",
+      "[IF !item:Security & Defence AND !box:250.box6] [OPTION] \"Handle the question of UK/EU cooperation on Security & Defence\" [EFFECT tick:250.box1] [EFFECT tick:250.box6] ►420"
     ]
   },
   "251": {
@@ -5073,12 +5073,12 @@
       "Time is limited, so you cannot personally oversee everything. A real pity, that, seeing as most of the people you have to delegate to are either bumblers or outright fanatics. You only have time to take care of one issue yourself."
     ],
     "OPTIONS": [
-      "[IF keyword:APRICITY AND !item:Exit Fee] [OPTION] \"Deal with EU exit fee arrangements\"  [EFFECT tick:350.box1] ►720",
-      "[IF !item:EU Trade Talks] [OPTION] \"Hold trade talks with the EU\" [EFFECT tick:350.box1] ►688",
-      "[IF !item:General Election] [OPTION] \"Try to call a general election\" [EFFECT tick:350.box1] ►416",
-      "[IF !item:Residency Rights] [OPTION] \"Agree the residency rights of UK and EU citizens\" [EFFECT tick:350.box1] ►638",
-      "[IF !item:Security & Defence] [OPTION] \"Handle the question of UK/EU Security and Defence cooperation\" [EFFECT tick:350.box1] ►420",
-      "[IF !item:International Trade Deals] [OPTION] \"Start preliminary talks on international trade deals\" [EFFECT tick:350.box1] ►335"
+      "[IF keyword:APRICITY AND !item:Exit Fee AND !box:350.box2] [OPTION] \"Deal with EU exit fee arrangements\"  [EFFECT tick:350.box1] [EFFECT tick:350.box2] ►720",
+      "[IF !item:EU Trade Talks AND !box:350.box3] [OPTION] \"Hold trade talks with the EU\" [EFFECT tick:350.box1] [EFFECT tick:350.box3] ►688",
+      "[IF !item:General Election AND !box:350.box4] [OPTION] \"Try to call a general election\" [EFFECT tick:350.box1] [EFFECT tick:350.box4] ►416",
+      "[IF !item:Residency Rights AND !box:350.box5] [OPTION] \"Agree the residency rights of UK and EU citizens\" [EFFECT tick:350.box1] [EFFECT tick:350.box5] ►638",
+      "[IF !item:Security & Defence AND !box:350.box6] [OPTION] \"Handle the question of UK/EU Security and Defence cooperation\" [EFFECT tick:350.box1] [EFFECT tick:350.box6] ►420",
+      "[IF !item:International Trade Deals AND !box:350.box7] [OPTION] \"Start preliminary talks on international trade deals\" [EFFECT tick:350.box1] [EFFECT tick:350.box7] ►335"
     ]
   },
   "351": {
@@ -6325,14 +6325,14 @@
       "Time is running out, and you can't be everywhere at once. Still, don't they say that a good leader learns to delegate? With only a few months left before Brexit, you can see to just a single major issue in person."
     ],
     "OPTIONS": [
-      "[IF !item:the NHS] [OPTION] \"Deal with the NHS\" [EFFECT tick:450.box1] ►803",
-      "[IF !item:Second EU Referendum] [OPTION] \"Decide whether to hold a second referendum on Brexit\" [EFFECT tick:450.box1] ►192",
-      "[IF !item:Residency Rights] [OPTION] \"Tackle the issue of the residency rights of UK and EU citizens\" [EFFECT tick:450.box1] ►638",
-      "[IF !item:Security & Defence] [OPTION] \"Deal with the question of UK/EU security and defence cooperation\" [EFFECT tick:450.box1] ►420",
-      "[IF !item:General Election] [OPTION] \"Attempt to call a general election\" [EFFECT tick:450.box1] ►416",
-      "[IF keyword:APRICITY AND !item:Exit Fee] [OPTION] \"Agree the exit fee Britain must pay to the EU\" [EFFECT tick:450.box1] ►611",
-      "[IF !item:EU Trade Talks] [OPTION] \"Deal with EU Trade Talks\" [EFFECT tick:450.box1] ►688",
-      "[IF !item:International Trade Deals] [OPTION] \"Start talks on international trade deals\" [EFFECT tick:450.box1] ►335"
+      "[IF !item:the NHS AND !box:450.box2] [OPTION] \"Deal with the NHS\" [EFFECT tick:450.box1] [EFFECT tick:450.box2] ►803",
+      "[IF !item:Second EU Referendum AND !box:450.box3] [OPTION] \"Decide whether to hold a second referendum on Brexit\" [EFFECT tick:450.box1] [EFFECT tick:450.box3] ►192",
+      "[IF !item:Residency Rights AND !box:450.box4] [OPTION] \"Tackle the issue of the residency rights of UK and EU citizens\" [EFFECT tick:450.box1] [EFFECT tick:450.box4] ►638",
+      "[IF !item:Security & Defence AND !box:450.box5] [OPTION] \"Deal with the question of UK/EU security and defence cooperation\" [EFFECT tick:450.box1] [EFFECT tick:450.box5] ►420",
+      "[IF !item:General Election AND !box:450.box6] [OPTION] \"Attempt to call a general election\" [EFFECT tick:450.box1] [EFFECT tick:450.box6] ►416",
+      "[IF keyword:APRICITY AND !item:Exit Fee AND !box:450.box7] [OPTION] \"Agree the exit fee Britain must pay to the EU\" [EFFECT tick:450.box1] [EFFECT tick:450.box7] ►611",
+      "[IF !item:EU Trade Talks AND !box:450.box8] [OPTION] \"Deal with EU Trade Talks\" [EFFECT tick:450.box1] [EFFECT tick:450.box8] ►688",
+      "[IF !item:International Trade Deals AND !box:450.box9] [OPTION] \"Start talks on international trade deals\" [EFFECT tick:450.box1] [EFFECT tick:450.box9] ►335"
     ]
   },
   "451": {
