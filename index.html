@@ -11611,6 +11611,7 @@
         function init() {
             registerServiceWorker();
             loadGame();
+            document.getElementById('sound-btn').textContent = gameState.soundEnabled ? '🔊' : '🔇';
             showStartScreen();
             setupEventListeners();
         }
@@ -11667,12 +11668,12 @@
 
         function showStartScreen() {
             document.getElementById('header').style.display = 'none';
-            const hasProgress = localStorage.getItem('canYouBrexit_save') !== null;
-            
+            const saved = readSave();
+            const hasProgress = saved !== null;
+
             // Check if the save represents actual progress (not just a fresh/reset state)
             let hasValidProgress = false;
             if (hasProgress) {
-                const saved = JSON.parse(localStorage.getItem('canYouBrexit_save'));
                 // Valid progress means: not at section 1, OR has keywords/items/boxes, OR metrics changed
                 hasValidProgress = saved.currentSection !== '1' ||
                                    saved.keywords.length > 0 ||
@@ -11735,13 +11736,39 @@
         }
 
         function saveGame() {
-            localStorage.setItem('canYouBrexit_save', JSON.stringify(gameState));
+            try {
+                localStorage.setItem('canYouBrexit_save', JSON.stringify(gameState));
+            } catch (e) {
+                // Storage unavailable (e.g. private browsing) - play on without persistence
+            }
+        }
+
+        // Returns the parsed save if it has the expected shape, otherwise null
+        function readSave() {
+            try {
+                const saved = JSON.parse(localStorage.getItem('canYouBrexit_save'));
+                if (saved &&
+                    typeof saved.currentSection === 'string' &&
+                    Array.isArray(saved.keywords) &&
+                    Array.isArray(saved.items) &&
+                    saved.boxes && typeof saved.boxes === 'object' &&
+                    saved.metrics &&
+                    ['Authority', 'Economy', 'Goodwill', 'Popularity'].every(m => typeof saved.metrics[m] === 'number')) {
+                    return saved;
+                }
+            } catch (e) {
+                // Corrupted save - ignore it rather than leaving the app unable to start
+            }
+            return null;
         }
 
         function loadGame() {
-            const saved = localStorage.getItem('canYouBrexit_save');
+            const saved = readSave();
             if (saved) {
-                gameState = JSON.parse(saved);
+                gameState = saved;
+                if (typeof gameState.soundEnabled !== 'boolean') {
+                    gameState.soundEnabled = true;
+                }
             }
         }
 
@@ -11930,6 +11957,9 @@
             // effects such as metric changes are not applied a second time)
             if (section.ONENTER && !skipOnEnter) {
                 processOnEnter(section.ONENTER);
+                // Persist immediately: if the player quits on this page, the
+                // resume path skips ONENTER and would otherwise lose these effects
+                saveGame();
             }
 
             // Build content
@@ -11967,10 +11997,8 @@
                     document.getElementById('content').innerHTML = html;
                     attachOptionListeners();
                     return;
-                } else if (gotoResult.dest === 'CONTINUE' && gotoResult.proseIndex !== null) {
-                    // Continue to next prose block
-                    html += renderProse(section.PROSE.slice(gotoResult.proseIndex));
                 }
+                // dest of null or CONTINUE falls through to COUNT_GOTO/OPTIONS
             }
 
             // COUNT_GOTO
