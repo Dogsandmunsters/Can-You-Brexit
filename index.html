@@ -2014,7 +2014,6 @@
     ],
     "GOTO": [
       "[IF keyword:APRICITY OR keyword:TIGHTROPE] \"Onwards\" ►665",
-      "[ELSEIF keyword:YELLOW] \"Onwards\" ►815",
       "[ELSEIF Popularity>=66] \"Onwards\" ►519",
       "[ELSEIF Popularity>=36] \"Onwards\" ►801",
       "[ELSE] \"Onwards\" ►50"
@@ -5116,7 +5115,8 @@
       "The important thing is to knock Colin Fungale out of the running. You can win against Tiffany Rufus once the vote goes to party members, but that's exactly where Fungale's fish-and-chips fascism would play well."
     ],
     "GOTO": [
-      "[IF keyword:UNCTION AND Authority>=61] \"You're on a roll\" ►523",
+      "[IF keyword:YELLOW] \"Carry on\" ►815",
+      "[ELSEIF keyword:UNCTION AND Authority>=61] \"You're on a roll\" ►523",
       "[ELSE] \"Carry on\" ►93"
     ]
   },
@@ -10955,8 +10955,9 @@
       "True to his word, perhaps for the first time ever, Peter Strewel endorses your views.",
       "'The Prime Minister is right,' he tells reporters. 'Can't have a democratic solution that rides roughshod over the wishes of nearly half the country, can we? Not a question of hard or soft, we're going to have a <em>better</em> Brexit. The kind of Brexit everyone can get behind. Then we can show the world a bit of that British pluck last seen in the War, eh? All pulling together to get to the promised land.'"
     ],
-    "OPTIONS": [
-      "[OPTION] \"Continue\" ►486"
+    "GOTO": [
+      "[IF keyword:UNCTION AND Authority>=61] \"You're on a roll\" ►523",
+      "[ELSE] \"Carry on\" ►93"
     ]
   },
   "816": {
