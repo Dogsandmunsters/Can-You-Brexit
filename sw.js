@@ -31,14 +31,20 @@ self.addEventListener('fetch', event => {
                  url.pathname.endsWith('/');
 
   if (isPage) {
+    const cachedPage = () => caches.match(event.request).then(cached => cached || caches.match('./index.html'));
     event.respondWith(
       fetch(event.request)
         .then(response => {
+          // Only a good page may replace the stored copy: a server error,
+          // redirect or captive-portal page must never become the offline game
+          if (!response.ok) {
+            return cachedPage().then(cached => cached || response);
+          }
           const copy = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+          event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)));
           return response;
         })
-        .catch(() => caches.match(event.request).then(cached => cached || caches.match('./index.html')))
+        .catch(() => cachedPage())
     );
   } else {
     event.respondWith(
