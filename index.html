@@ -34,19 +34,23 @@
             color: #dc143c;
             padding: 15px 20px;
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         header h1 {
             font-size: 1.5em;
             font-weight: bold;
+            white-space: nowrap;
         }
 
         .header-buttons {
             display: flex;
             gap: 10px;
+            margin-left: auto;
         }
 
         .header-btn {
@@ -58,6 +62,28 @@
             font-size: 0.9em;
             border-radius: 3px;
             transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        /* On narrow phones the title keeps its own line and the four
+           buttons drop to a second row instead of breaking mid-word */
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 15px;
+            }
+
+            header h1 {
+                font-size: 1.25em;
+            }
+
+            .header-buttons {
+                gap: 6px;
+            }
+
+            .header-btn {
+                padding: 6px 8px;
+                font-size: 0.8em;
+            }
         }
 
         .header-btn:hover {
@@ -11824,6 +11850,7 @@
                 }
             }
 
+            console.warn('Unrecognised condition (treated as false): ' + condition);
             return false;
         }
 
@@ -11833,8 +11860,10 @@
 
             // Get keyword
             const getKWMatch = effect.match(/^getKW:(.+)$/);
-            if (getKWMatch && !gameState.keywords.includes(getKWMatch[1])) {
-                gameState.keywords.push(getKWMatch[1]);
+            if (getKWMatch) {
+                if (!gameState.keywords.includes(getKWMatch[1])) {
+                    gameState.keywords.push(getKWMatch[1]);
+                }
                 return;
             }
 
@@ -11847,8 +11876,10 @@
 
             // Get item
             const getItemMatch = effect.match(/^getItem:(.+)$/);
-            if (getItemMatch && !gameState.items.includes(getItemMatch[1])) {
-                gameState.items.push(getItemMatch[1]);
+            if (getItemMatch) {
+                if (!gameState.items.includes(getItemMatch[1])) {
+                    gameState.items.push(getItemMatch[1]);
+                }
                 return;
             }
 
@@ -11892,6 +11923,8 @@
                 gameState.metrics[metric] = Math.max(0, Math.min(100, gameState.metrics[metric] + change));
                 return;
             }
+
+            console.warn('Unrecognised effect (ignored): ' + effect);
         }
 
         // Parse line for effects
@@ -11934,6 +11967,14 @@
             return match ? match[1] : 'Continue';
         }
 
+        // Replace the page content and return to the top of the page, so a
+        // new section is read from its first line rather than from wherever
+        // the previous section had been scrolled to
+        function showContent(html) {
+            document.getElementById('content').innerHTML = html;
+            window.scrollTo(0, 0);
+        }
+
         // Render section
         function renderSection(sectionNum, skipOnEnter = false) {
             gameState.currentSection = sectionNum;
@@ -11941,7 +11982,7 @@
 
             const section = SECTIONS[sectionNum];
             if (!section) {
-                document.getElementById('content').innerHTML = '<div class="prose"><p>Section not found.</p></div>';
+                showContent('<div class="prose"><p>Section not found.</p></div>');
                 return;
             }
 
@@ -11965,7 +12006,6 @@
 
             // Build content
             let html = '';
-            let showContent = true;
 
             // PROSE
             if (section.PROSE) {
@@ -11980,13 +12020,15 @@
             // TOSS
             if (section.TOSS_ONE) {
                 html += renderToss(section.TOSS_ONE, 1);
-                document.getElementById('content').innerHTML = html;
+                showContent(html);
+                attachTossListener(section.TOSS_ONE, 1);
                 return;
             }
 
             if (section.TOSS_TWO) {
                 html += renderToss(section.TOSS_TWO, 2);
-                document.getElementById('content').innerHTML = html;
+                showContent(html);
+                attachTossListener(section.TOSS_TWO, 2);
                 return;
             }
 
@@ -11995,7 +12037,7 @@
                 const gotoResult = processGoto(section.GOTO);
                 if (gotoResult.dest && gotoResult.dest !== 'CONTINUE') {
                     html += `<div class="options"><button class="option-button" data-dest="${gotoResult.dest}" data-effects='${gotoResult.effects}'>${gotoResult.text}</button></div>`;
-                    document.getElementById('content').innerHTML = html;
+                    showContent(html);
                     attachOptionListeners();
                     return;
                 }
@@ -12006,7 +12048,7 @@
             if (section.COUNT_GOTO) {
                 const countResult = processCountGoto(section.COUNT_GOTO);
                 html += `<div class="options"><button class="option-button" data-dest="${countResult.dest}" data-effects='${countResult.effects}'>${countResult.text}</button></div>`;
-                document.getElementById('content').innerHTML = html;
+                showContent(html);
                 attachOptionListeners();
                 return;
             }
@@ -12016,7 +12058,7 @@
                 html += renderOptions(section.OPTIONS);
             }
 
-            document.getElementById('content').innerHTML = html;
+            showContent(html);
             attachOptionListeners();
         }
 
@@ -12164,15 +12206,16 @@
             html += `<button id="toss-button">${numCoins === 1 ? 'Flip a coin' : 'Toss the coins'}</button>`;
             html += '<div class="toss-outcomes" id="toss-outcomes"></div>';
             html += '</div>';
-            
-            setTimeout(() => {
-                document.getElementById('toss-button').addEventListener('click', () => {
-                    playSound();
-                    performToss(tossLines, numCoins);
-                });
-            }, 100);
-            
+
             return html;
+        }
+
+        // Wire up the toss button once the coin-toss markup is on the page
+        function attachTossListener(tossLines, numCoins) {
+            document.getElementById('toss-button').addEventListener('click', () => {
+                playSound();
+                performToss(tossLines, numCoins);
+            });
         }
 
         function performToss(tossLines, numCoins) {
